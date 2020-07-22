@@ -29,17 +29,17 @@ OPTIONAL. Extension criteria. Defaults to ignoring extension.
 ### `-o <string>`
 
 OPTIONAL. Output where to move the matching files. If not specified, by default creates a
-folder named `<string>`.
+folder named `string`.
 
 #### Examples
 
-+   This example searches all .png files in the ~/Pictures folder and moves them
-    to the output ~/Pictures/Holiday folder which contain the given string.
++   This example searches all `.png` files in the `~/Pictures` folder and moves them
+    to the output `~/Pictures/Holiday` folder which contain the given string `image`.
 
         python filesort.py -s image -f ~/Pictures -e .png -o ~/Pictures/Holiday
 
 +   Minimal example, only -s provided. Creates a folder named `image` and all files that
-    match name `image`.
+    match name `image` are moved into it.
 
         python filesort.py -s image
 

@@ -1,8 +1,4 @@
-import os
-import argparse
-import sys
-import tempfile
-import subprocess
+import os, argparse, sys, tempfile, subprocess
 
 if __name__ == '__main__':
     PARSER = argparse.ArgumentParser()
@@ -10,7 +6,7 @@ if __name__ == '__main__':
     PARSER.add_argument('-f', '--folder', help="Folder path")
     PARSER.add_argument('-v', '--verbose', help="Additional verbose", action='store_true', default=False)
     PARSER.add_argument('-e', '--extension', help="File extension which to filter the files in the folder, leaving it empty ignores extensions", default="")
-    PARSER.add_argument('-o', '--output', help="Output folder which to create and move the files to")
+    PARSER.add_argument('-o', '--output', help="Output folder which to create and move the files to, by default creates a folder named <string>")
     ARGS = PARSER.parse_args()
 
     verbose = ARGS.verbose
@@ -63,19 +59,22 @@ if __name__ == '__main__':
                 for i in range(0, len(origin)):
                     temp.writelines(origin[i] + "   " + destination[i] + "\n")
                 temp.seek(0)
-                subprocess.call(['vim', temp.name])
+
+                opener = "open" if sys.platform == "darwin" else "xdg-open"
+                #subprocess.call([opener, temp.name])
+                subprocess.Popen([opener,temp.name])
 
                 cont = input("Finish moving? (y/n)   ")
                 if cont != "y":
                     print("Exiting...")
                     sys.exit(1)
             finally:
+                if verbose: print("Closing temporary file...")
                 temp.close()
-                print("Closing temporary file...")
 
         if not os.path.exists(output): 
             os.makedirs(output)
-            print("Creating a folder '{}' as one does not exist.".format(output))
+            if verbose: print("Creating a folder '{}' as one does not exist.".format(output))
         if len(origin) == len(destination):
             for i in range(0, len(origin)):
                 os.rename(origin[i], destination[i])
