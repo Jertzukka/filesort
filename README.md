@@ -3,12 +3,12 @@ filesort.py
 
 Python script which allows you to select specific files which match with a string 
 and optionally extension, and then group them into a folder. Similar functionality
-to UNIX ´mv´ command. Allows reviewing the changes in text editor before
+to UNIX `mv` command. Allows reviewing the changes in text editor before
 they are committed.
 
 Usage
 -----
-    $ python filesort.py [-h] [-s STRING] [-f FOLDER] [-v] [-e EXTENSION] [-o OUTPUT]
+    $ python filesort.py -s STRING [-h] [-f FOLDER] [-v] [-e EXTENSION] [-o OUTPUT]
 
 ### `-s <string>`
 
@@ -16,15 +16,20 @@ String which to group the files by.
 
 ### `-f <string>`
 
-Origin folder from where to search from. Defaults to current working folder ´./´
+OPTIONAL. Origin folder from where to search from. Defaults to current working folder `./`
 
 ### `-v`
 
-Increased verbosity.
+OPTIONAL. Increased verbosity.
 
 ### `-e <string>`
 
-Extension criteria. Defaults to ignoring extension.
+OPTIONAL. Extension criteria. Defaults to ignoring extension.
+
+### `-o <string>`
+
+OPTIONAL. Output where to move the matching files. If not specified, by default creates a
+folder named `<string>`.
 
 #### Examples
 
@@ -32,6 +37,11 @@ Extension criteria. Defaults to ignoring extension.
     to the output ~/Pictures/Holiday folder which contain the given string.
 
         python filesort.py -s image -f ~/Pictures -e .png -o ~/Pictures/Holiday
+
++   Minimal example, only -s provided. Creates a folder named `image` and all files that
+    match name `image`.
+
+        python filesort.py -s image
 
 Note
 ----
