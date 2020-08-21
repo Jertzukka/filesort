@@ -12,11 +12,12 @@ Usage
 
 ### `-s <string>`
 
-String which to group the files by.
+String which to group the files by. Supports Unix shell-style wildcards (https://docs.python.org/3/library/fnmatch.html)
 
 ### `-f <string>`
 
-OPTIONAL. Origin folder from where to search from. Defaults to current working folder `./`
+OPTIONAL. Origin folder from where to search from. Defaults to current working folder `./`,
+and using `.` in folder path is replaced with working directory.
 
 ### `-v`
 
@@ -29,7 +30,7 @@ OPTIONAL. Extension criteria. Defaults to ignoring extension.
 ### `-o <string>`
 
 OPTIONAL. Output where to move the matching files. If not specified, by default creates a
-folder named `string`.
+folder named `string`. Using `.` in output path is replaced with working directory.
 
 #### Examples
 
@@ -37,6 +38,13 @@ folder named `string`.
     to the output `~/Pictures/Holiday` folder which contain the given string `image`.
 
         python filesort.py -s image -f ~/Pictures -e .png -o ~/Pictures/Holiday
+
++   Example with Unix shell-style wildcards. Searches all files which include word
+    `picture` anywhere in the filename and ends with `.png`. Using symbols in search
+    string forces you to use -o to input output folder. You can use `.` to point to
+    working directory.
+
+        python filesort.py -s *picture*.png -o ./pictures
 
 +   Minimal example, only -s provided. Creates a folder named `image` and all files that
     match name `image` are moved into it.
